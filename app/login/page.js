@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AuthForm from "@/components/AuthForm";
+import AuthForm from "@/components/AuthForm.jsx";
 import { AuthContext } from "../context/AuthContext.js";
 
 export default function Login() {
