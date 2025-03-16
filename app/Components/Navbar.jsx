@@ -1,10 +1,9 @@
-
 "use client";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
-import { AuthContext } from "../app/context/AuthContext.js";
+import { AuthContext } from "../context/AuthContext.js";
 
 export default function Navbar() {
   const router = useRouter();

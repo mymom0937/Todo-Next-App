@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/config/db";
-import TodoModel from "@/lib/models/TodoModel";
+import { connectDB } from "@/app/lib/config/db";
+import TodoModel from "@/app/lib/models/TodoModel";
 import jwt from "jsonwebtoken";
 
 /**
@@ -64,7 +64,7 @@ export async function POST(request) {
 
     // Create todos in bulk
     const createdTodos = await TodoModel.insertMany(
-      todosArray.map(todo => ({
+      todosArray.map((todo) => ({
         userId: user.id,
         title: todo.title,
         description: todo.description,
@@ -83,7 +83,6 @@ export async function POST(request) {
     );
   }
 }
-
 
 // Mark a todo as completed/update
 export async function PUT(request) {

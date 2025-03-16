@@ -1,8 +1,7 @@
-
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { connectDB } from "@/lib/config/db"; // Import database connection
-import UserModel from "@/lib/models/UserModel"; // Import the User model
+import { connectDB } from "@/app/lib/config/db"; // Import database connection
+import UserModel from "@/app/lib/models/UserModel"; // Import the User model
 
 export async function GET(request) {
   try {
@@ -25,7 +24,6 @@ export async function GET(request) {
     // Return user data including name, email, and any other details
     // console.log("Fetched user:", user);
     return NextResponse.json({ name: user.name, email: user.email });
-
   } catch (error) {
     console.error("Error verifying token:", error);
     return NextResponse.json(

@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AuthForm from "@/components/AuthForm.jsx";
+import AuthForm from "@/app/Components/AuthForm.jsx";
 import { AuthContext } from "../context/AuthContext.js";
 
 export default function Login() {
@@ -27,7 +27,7 @@ export default function Login() {
       </div>
     );
   }
-  // min-h-screen h-full 
+  // min-h-screen h-full
   return (
     <main className=" bg-gray-100 flex items-center justify-center px-4 pt-20 md:pt-32 w-full">
       <div className="max-w-lg bg-white p-6 rounded-lg shadow-lg text-center">

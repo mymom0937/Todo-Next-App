@@ -1,10 +1,9 @@
-
 "use client";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
-import Todo from "@/components/Todo";
+import Todo from "@/app/Components/Todo";
 import { FaSearch } from "react-icons/fa";
 
 export default function TodoList() {
@@ -144,8 +143,8 @@ export default function TodoList() {
                   Actions
                 </th>
               </tr>
-                </thead>
-                
+            </thead>
+
             <tbody>
               {currentTodos.map((todo, index) => (
                 <Todo
