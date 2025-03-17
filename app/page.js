@@ -1,5 +1,6 @@
 "use client";
-import { Button } from "./Components/ui/page.js";
+// import { Button } from "./Components/ui/ui-components.jsx";
+import Button from "./Components/ui/ui-components.jsx";
 import Link from "next/link";
 
 export default function Home() {

@@ -22,6 +22,14 @@ export default function TodoList() {
     }
   }, [token]);
 
+  // ==============
+  
+// useEffect(() => {
+//   fetchTodos();
+// }, [fetchTodos]);
+
+  // =============
+
   const fetchTodos = async () => {
     try {
       const { data } = await axios.get("/api/todos", {
