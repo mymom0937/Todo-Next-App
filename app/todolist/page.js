@@ -1,5 +1,4 @@
 import TodoList from "@/app/Components/TodoList";
-
 export default function TodoListPage() {
   return (
     <div className="flex flex-col bg-gray-100 dark:bg-gray-800 min-h-screen mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">

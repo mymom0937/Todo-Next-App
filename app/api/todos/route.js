@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/app/lib/config/db";
 import TodoModel from "@/app/lib/models/TodoModel";
 import jwt from "jsonwebtoken";
-
 /**
  * Middleware to verify JWT token
  * @param {Request} request - Incoming request

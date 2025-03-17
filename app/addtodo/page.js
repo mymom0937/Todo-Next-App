@@ -1,5 +1,4 @@
 import TodoForm from "@/app/Components/TodoForm.jsx";
-
 export default function AddTodoPage() {
   return (
     <div className="max-w-5xl mx-auto p-4">
