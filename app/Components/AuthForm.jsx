@@ -1,10 +1,12 @@
 "use client";
 import { useState, useContext } from "react";
 import axios from "axios";
+import { z } from "zod"; 
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/app/context/AuthContext";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import AuthSchema from "../Schemas/AuthSchema.jsx";
 
 export default function AuthForm() {
   const { login } = useContext(AuthContext);
@@ -21,15 +23,28 @@ export default function AuthForm() {
     e.preventDefault();
     setError("");
 
-    if (!email || !password || (!isLogin && !name)) {
-      return toast.error("All fields are required.", { autoClose: 3000 });
-    }
-
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(email)) {
-      return toast.error("Please enter a valid email address.", {
-        autoClose: 3000,
-      });
+    // Client-side validation with Zod
+    const validationData = { email, password, ...(isLogin ? {} : { name }) };
+    try {
+      if (isLogin) {
+        AuthSchema.omit({ name: true }).parse({ email, password });
+      } else {
+        AuthSchema.parse(validationData);
+      }
+    } catch (validationError) {
+      // Handle Zod validation errors
+      if (validationError instanceof z.ZodError) {
+        const errorMessages = validationError.errors
+          .map((err) => err.message)
+          .join(", ");
+        toast.error(errorMessages, { autoClose: 3000 });
+      } else {
+        toast.error("An unexpected validation error occurred.", {
+          autoClose: 3000,
+        });
+        console.error("Validation Error:", validationError);
+      }
+      return;
     }
 
     setLoading(true);
@@ -42,7 +57,7 @@ export default function AuthForm() {
       if (response?.data?.token) {
         toast.success(
           response.data.message ||
-            `${isLogin ? "Login" : "Registration"} successfully!`,
+            `${isLogin ? "Login" : "Registration"} successful!`,
           { autoClose: 3000 }
         );
         try {
@@ -72,7 +87,7 @@ export default function AuthForm() {
       setLoading(false);
     }
   };
-  // h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[40vh]
+
   return (
     <div className="flex justify-center items-center h-auto bg-gray-100 px-4 rounded-lg py-10">
       <div className="w-full max-w-sm sm:max-w-md bg-white p-2 rounded-lg shadow-md mt-0">
@@ -88,7 +103,6 @@ export default function AuthForm() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Name"
               className="w-full p-3 border-2 text-gray-700 rounded-lg focus:ring focus:ring-blue-200"
-              required
             />
           )}
           <input
@@ -97,7 +111,6 @@ export default function AuthForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             className="w-full p-3 border-2 text-gray-700 rounded-lg focus:ring focus:ring-blue-200"
-            required
           />
           <div className="relative">
             <input
@@ -106,7 +119,6 @@ export default function AuthForm() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="w-full p-3 border-2 text-gray-700 rounded-lg pr-10 focus:ring focus:ring-blue-200"
-              required
             />
             <button
               type="button"
