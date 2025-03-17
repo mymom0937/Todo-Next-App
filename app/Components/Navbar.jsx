@@ -52,7 +52,10 @@ export default function Navbar() {
 
   return (
     <nav className="bg-neutral-200 dark:bg-gray-800 text-gray-900 dark:text-white px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center font-semibold fixed top-0 left-0 w-full z-50 shadow-md">
-      <Link href="/" className="text-lg sm:text-xl font-bold pl-6 sm:pl-10">
+      <Link
+        href="/"
+        className="text-lg sm:text-xl font-bold ml-6 sm:ml-10 pl-6 sm:pl-10"
+      >
         Todo App
       </Link>
 
