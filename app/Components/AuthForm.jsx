@@ -10,7 +10,7 @@ import AuthSchema from "../Schemas/AuthSchema.jsx";
 
 export default function AuthForm() {
   const { login } = useContext(AuthContext);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
