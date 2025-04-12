@@ -13,8 +13,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
-      // setTimeout(() => router.push("/todos"), 3000);
-      setTimeout(() => router.push("/addtodo"), 3000);
+      setTimeout(() => router.push("/addtodo"), 1000);
     } else {
       setCheckingAuth(false);
     }
@@ -22,24 +21,26 @@ export default function Login() {
 
   if (checkingAuth) {
     return (
-      <div className="h-auto bg-gray-100 flex items-center justify-center p-4">
-        <div className="text-gray-600">Checking authentication...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-gray-600">Verifying authentication...</div>
       </div>
     );
   }
-  // min-h-screen h-full
+
   return (
-    <main className=" bg-gray-100 flex items-center justify-center px-4 pt-20 md:pt-32 w-full">
-      <div className="max-w-lg bg-white p-6 rounded-lg shadow-lg text-center">
-        <h1 className="text-2xl font-semibold text-gray-700 mb-4">
-          Welcome Back to the Todo App
-        </h1>
-        <h2 className="text-xl text-gray-500 mb-4">
-          Log in or sign up to get started.
-        </h2>
-        <h5 className="text-lg text-gray-600 mb-0">
-          Manage your tasks efficiently by staying organized and focused.
-        </h5>
+    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-sm">
+        <div className="text-center space-y-4 mb-8">
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Welcome Back to the Todo App
+          </h1>
+          <p className="text-gray-600">
+            Log in or sign up to get started
+          </p>
+          <p className="text-sm text-gray-500">
+            Manage your tasks efficiently by staying organized and focused
+          </p>
+        </div>
         <AuthForm login={login} />
       </div>
     </main>
