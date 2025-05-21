@@ -1,6 +1,5 @@
-
 "use client";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 // Create context with null as the default value
 export const AuthContext = createContext(null);
@@ -8,13 +7,18 @@ export const AuthContext = createContext(null);
 // AuthProvider Component
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
+  const initialLoadRef = useRef(true);
 
   // Load token from localStorage on client-side
   useEffect(() => {
     try {
-      const storedToken = localStorage.getItem("token");
-      if (storedToken) {
-        setToken(storedToken);
+      // Only run on initial load
+      if (initialLoadRef.current) {
+        initialLoadRef.current = false;
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setToken(storedToken);
+        }
       }
     } catch (error) {
       console.error("Error loading token from localStorage:", error);
@@ -34,7 +38,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     try {
       localStorage.removeItem("token");
       setToken(null);

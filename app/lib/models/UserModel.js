@@ -17,6 +17,19 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    provider: {
+      type: String,
+      enum: ['credentials', 'google', 'github'],
+      default: 'credentials'
+    },
+    providerId: {
+      type: String,
+      default: null
+    },
+    image: {
+      type: String,
+      default: null
+    }
   },
   { timestamps: true } // Adds createdAt & updatedAt
 );
